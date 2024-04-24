@@ -1,15 +1,50 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="uk">
 
-<div th:insert="blocks/head :: head"></div>
-<div th:insert="blocks/header :: header"></div>
+<head>
+    <title>ZLAGODA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%; /* Зробити html та body повнорозмірними */
+        }
+
+        .wrapper {
+            min-height: 100%; /* Мінімальна висота контейнера для розміщення футера внизу */
+            position: relative; /* Позиція relative для коректної роботи абсолютної позиції футера */
+        }
+
+        .content {
+            padding-bottom: 60px; /* Відступ внизу контенту для футера */
+        }
+
+        .footer {
+            position: absolute; /* Абсолютна позиція футера */
+            bottom: 0; /* Розміщення внизу */
+            width: 100%; /* Ширина 100% */
+            background-color: #343a40; /* Колір фону */
+            color: #fff; /* Колір тексту */
+            text-align: center; /* Текст по центру */
+            padding: 10px 0; /* Відступи зверху та знизу */
+        }
+    </style>
+</head>
 
 <body>
-<div>
-    <div class="category mt-5">
-        <h1>Головна</h1>
+    <div class="wrapper">
+        <div th:insert="blocks/header :: header"></div>
+
+        <div class="content">
+            <div>
+                <div class="category mt-5">
+                    <h1>Головна</h1>
+                </div>
+            </div>
+        </div>
+
+        <div th:insert="blocks/footer :: footer" class="footer"></div>
     </div>
-</div>
 </body>
 
 </html>
