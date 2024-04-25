@@ -65,8 +65,8 @@
           </thead>
           <tbody>
           <tr th:each="el : ${categories}">
-            <td th:text="${el.id}"></td>
-            <td th:text="${el.name}"></td>
+            <td th:text="${el.getId()}"></td>
+            <td th:text="${el.getName()}"></td>
           </tr>
           </tbody>
         </table>

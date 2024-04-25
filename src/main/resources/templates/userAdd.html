@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+
+<head>
+    <title>ZLAGODA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .wrapper {
+            min-height: 100%;
+            position: relative;
+        }
+
+        .content {
+            padding-bottom: 60px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        /* Вирівнюємо таблицю по центру */
+        .center-table {
+            margin: 0 auto;
+            max-width: 500px; /* Додано обмеження ширини */
+        }
+
+        /* Відступ між кнопкою та футером */
+        .add-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div th:insert="blocks/header :: header"></div>
+
+    <div class="content center-table">
+        <div>
+            <div class="mt-5">
+                <h2 class="title">Додати користувача</h2>
+                <form action="/user/add" method="post">
+                    <input type="number" name="id" placeholder="ID" class="form-control"><br>
+                    <input type="text" name="surname" placeholder="Прізвище" class="form-control"><br>
+                    <input type="text" name="name" placeholder="Ім'я" class="form-control"><br>
+                    <input type="text" name="patronymic" placeholder="По-батькові" class="form-control"><br>
+                    <input type="text" name="role" placeholder="Посада" class="form-control"><br>
+                    <input type="number" name="salary" placeholder="Зарплата" class="form-control"><br>
+                    <a>Дата народження:</a>
+                    <input type="date" name="date_of_birth" class="form-control"><br>
+                    <a>Дата виходу на роботу:</a>
+                    <input type="date" name="date_of_start" class="form-control"><br>
+                    <input type="text" name="phone" placeholder="Номер телефону" class="form-control"><br>
+                    <input type="text" name="city" placeholder="Місто" class="form-control"><br>
+                    <input type="text" name="street" placeholder="Вулиця" class="form-control"><br>
+                    <input type="text" name="zip" placeholder="ZIP" class="form-control"><br>
+                    <button type="submit" class="btn btn-success">Додати</button><br>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="blocks/footer :: footer" class="footer"></div>
+</div>
+</body>
+
+</html>

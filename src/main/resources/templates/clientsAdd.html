@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+
+<head>
+  <title>ZLAGODA</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+    }
+
+    .wrapper {
+      min-height: 100%;
+      position: relative;
+    }
+
+    .content {
+      padding-bottom: 60px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    /* Вирівнюємо таблицю по центру */
+    .center-table {
+      margin: 0 auto;
+      max-width: 500px; /* Додано обмеження ширини */
+    }
+
+    /* Відступ між кнопкою та футером */
+    .add-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div th:insert="blocks/header :: header"></div>
+
+  <div class="content center-table">
+    <div>
+      <div class="clients mt-5">
+        <h2 class="title">Додати клієнта</h2>
+        <form action="/clients/add" method="post">
+          <input type="text" name="id" placeholder="ID" class="form-control" maxlength="13"><br>
+          <input type="text" name="surname" placeholder="Прізвище" class="form-control" maxlength="50"><br>
+          <input type="text" name="name" placeholder="Ім'я" class="form-control" maxlength="50"><br>
+          <input type="text" name="patronymic" placeholder="По-батькові" class="form-control" maxlength="50"><br>
+          <input type="text" name="phone" placeholder="Номер телефону" class="form-control" maxlength="13"><br>
+          <input type="text" name="city" placeholder="Місто" class="form-control" maxlength="50"><br>
+          <input type="text" name="street" placeholder="Вулиця" class="form-control" maxlength="50"><br>
+          <input type="text" name="zip" placeholder="ZIP" class="form-control" maxlength="9"><br>
+          <input type="number" name="percent" placeholder="Відсоток" class="form-control" min="1"><br>
+          <button type="submit" class="btn btn-success">Додати</button><br>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="blocks/footer :: footer" class="footer"></div>
+</div>
+</body>
+
+</html>
