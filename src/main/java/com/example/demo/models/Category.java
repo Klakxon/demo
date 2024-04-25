@@ -7,8 +7,18 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Category {
+
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public Category(String name) {
+        this.name = name;
+    }
+    public Category() {
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
