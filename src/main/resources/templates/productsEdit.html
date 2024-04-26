@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+
+<head>
+  <title>ZLAGODA</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .wrapper {
+      min-height: 100%;
+      position: relative;
+    }
+
+    .content {
+      padding-bottom: 60px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    /* Вирівнюємо таблицю по центру */
+    .center-table {
+      margin: 0 auto;
+      max-width: 500px; /* Додано обмеження ширини */
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div th:insert="blocks/header :: header"></div>
+
+  <div class="content center-table">
+    <div>
+      <div class="products mt-5">
+        <h2 class="title">Редагувати продукт</h2>
+        <form action="/products/edit" method="post">
+          <!-- Випадаючий список продуктів -->
+          <select name="id" class="form-control">
+            <option value="">Виберіть продукт</option>
+            <!-- Відображення усіх продуктів зі списку -->
+            <option th:each="product : ${products}"
+                    th:value="${product.getId()}"
+                    th:text="${product.getName()}">
+            </option>
+          </select><br>
+          <!-- Випадаючий список категорій товарів -->
+          <select name="id_category" class="form-control">
+            <option value="">Виберіть категорію товарів</option>
+            <!-- Відображення усіх категорій товарів зі списку -->
+            <option th:each="category : ${categories}"
+                    th:value="${category.getId()}"
+                    th:text="${category.getName()}">
+            </option>
+          </select><br>
+          <!-- Поля для введення нових значень -->
+          <input type="text" name="name" placeholder="Назва" class="form-control" maxlength="50"><br>
+          <input type="text" name="description" placeholder="Опис" class="form-control" maxlength="100"><br>
+          <button type="submit" class="btn btn-success">Редагувати</button><br><br>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="blocks/footer :: footer" class="footer"></div>
+</div>
+</body>
+
+</html>
