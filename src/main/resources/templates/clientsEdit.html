@@ -6,7 +6,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <style>
-    html, body {
+    html,
+    body {
       height: 100%;
     }
 
@@ -48,17 +49,27 @@
   <div class="content center-table">
     <div>
       <div class="clients mt-5">
-        <h2 class="title">Додати карту клієнта</h2>
-        <form action="/clients/add" method="post">
+        <h2 class="title">Редагувати карту клієнта</h2>
+        <form action="/clients/edit" method="post">
+          <!-- Випадаючий список карт клієнтів -->
+          <select name="id" class="form-control">
+            <option value="">Виберіть карту клієнта</option>
+            <!-- Відображення усіх карт клієнтів зі списку -->
+            <option th:each="client : ${clients}"
+                    th:value="${client.getId()}"
+                    th:text="${client.getSurname() + ' ' + client.getName() + ' ' + client.getPatronymic()}">
+            </option>
+          </select><br>
+          <!-- Поля для введення нових значень -->
           <input type="text" name="surname" placeholder="Прізвище" class="form-control" maxlength="50"><br>
           <input type="text" name="name" placeholder="Ім'я" class="form-control" maxlength="50"><br>
           <input type="text" name="patronymic" placeholder="По-батькові" class="form-control" maxlength="50"><br>
-          <input type="text" name="phone" placeholder="Номер телефону" class="form-control" maxlength="13"><br>
+          <input type="text" name="phone" placeholder="Телефон" class="form-control" maxlength="13"><br>
           <input type="text" name="city" placeholder="Місто" class="form-control" maxlength="50"><br>
           <input type="text" name="street" placeholder="Вулиця" class="form-control" maxlength="50"><br>
-          <input type="text" name="zip" placeholder="ZIP" class="form-control" maxlength="9"><br>
+          <input type="text" name="zip" placeholder="ZIP" class="form-control" maxlength="50"><br>
           <input type="number" name="percent" placeholder="Відсоток" class="form-control" min="1" max="20"><br>
-          <button type="submit" class="btn btn-success">Додати</button><br><br>
+          <button type="submit" class="btn btn-success">Редагувати</button><br><br>
         </form>
       </div>
     </div>

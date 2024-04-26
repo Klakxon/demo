@@ -1,11 +1,13 @@
 package com.example.demo.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Card {
-    public Card(String id, String surname, String name, String patronymic, String phone, String city, String street,
+    public Card(Long id, String surname, String name, String patronymic, String phone, String city, String street,
                 String zip, int percent) {
         this.id = id;
         this.surname = surname;
@@ -33,15 +35,16 @@ public class Card {
     }
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String surname, name, patronymic, phone, city, street, zip;
     private int percent;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

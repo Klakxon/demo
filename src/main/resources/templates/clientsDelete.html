@@ -48,20 +48,19 @@
 
   <div class="content center-table">
     <div>
-      <div class="category mt-5">
-        <h2 class="title">Редагувати категорію товарів</h2>
-        <form action="/category/edit" method="post">
+      <div class="clients mt-5">
+        <h2 class="title">Видалити карту клієнта</h2>
+        <form action="/clients/delete" method="post">
           <!-- Випадаючий список категорій -->
           <select name="id" class="form-control">
-            <option value="">Виберіть категорію</option>
+            <option value="">Виберіть карту клієнта</option>
             <!-- Відображення усіх категорій зі списку -->
-            <option th:each="category : ${categories}"
-                    th:value="${category.id}"
-                    th:text="${category.name}"></option>
+            <option th:each="card : ${clients}"
+                    th:value="${card.getId()}"
+                    th:text="${card.getSurname() + ' ' + card.getName() + ' ' + card.getPatronymic()}">
+            </option>
           </select><br>
-          <!-- Поле для введення нової назви категорії -->
-          <input type="text" name="name" placeholder="Назва" class="form-control" maxlength="50"><br>
-          <button type="submit" class="btn btn-success">Редагувати</button>
+          <button type="submit" class="btn btn-success">Видалити</button>
         </form>
       </div>
     </div>
