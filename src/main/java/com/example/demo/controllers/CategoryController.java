@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CategoryController {
@@ -27,9 +28,20 @@ public class CategoryController {
     }
 
     @PostMapping("/category/add")
-    public String categoryPostAdd(@RequestParam Long id, @RequestParam String name, Model model) {
-        Category category = new Category(id, name);
-        categoryRepository.save(category);
-        return "redirect:/category";
+    public String categoryPostAdd(@RequestParam String name, RedirectAttributes redirectAttributes, Model model) {
+        // Перевірка, чи існує вже категорія з такою ж назвою
+        Category existingCategory = categoryRepository.findByName(name);
+
+        if (existingCategory != null) {
+            // Якщо категорія з такою ж назвою вже існує, перенаправляємо користувача на сторінку error-page
+            return "redirect:/error-page";
+        } else {
+            // Якщо категорія з такою назвою не існує, додаємо нову категорію
+            Category category = new Category(name);
+            categoryRepository.save(category);
+            return "redirect:/category";
+        }
     }
+
+
 }

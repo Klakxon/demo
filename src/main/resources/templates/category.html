@@ -45,6 +45,12 @@
       top: 180px; /* Відступ від верхнього краю */
       right: 50px; /* Відступ від правого краю */
     }
+
+    /* Додаємо стилі для контейнера з прокруткою */
+    .scrollable-table {
+      max-height: 400px; /* Максимальна висота таблиці */
+      overflow-y: auto; /* Додаємо вертикальну прокрутку */
+    }
   </style>
 </head>
 
@@ -56,20 +62,23 @@
     <div>
       <div class="category mt-5">
         <h2 class="title">Категорії товарів</h2>
-        <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
-          <thead>
-          <tr>
-            <th class="title">ID</th>
-            <th class="title">Назва</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="el : ${categories}">
-            <td th:text="${el.getId()}"></td>
-            <td th:text="${el.getName()}"></td>
-          </tr>
-          </tbody>
-        </table>
+        <!-- Додаємо клас scrollable-table для контейнера з прокруткою -->
+        <div class="scrollable-table">
+          <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
+            <thead>
+            <tr>
+              <th class="title">ID</th>
+              <th class="title">Назва</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="el : ${categories}">
+              <td th:text="${el.getId()}"></td>
+              <td th:text="${el.getName()}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
