@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 public class CategoryController {
     @Autowired
@@ -28,7 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping("/category/add")
-    public String categoryPostAdd(@RequestParam String name, RedirectAttributes redirectAttributes, Model model) {
+    public String categoryPostAdd(@RequestParam String name, Model model) {
         // Перевірка, чи існує вже категорія з такою ж назвою
         Category existingCategory = categoryRepository.findByName(name);
 
@@ -43,5 +45,50 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/category/edit")
+    public String categoryEdit(Model model) {
+        // Отримуємо список усіх категорій з бази даних
+        Iterable<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories); // Передаємо список категорій в модель
+        return "categoryEdit"; // Відображаємо сторінку редагування категорії
+    }
 
+    @PostMapping("/category/edit")
+    public String categoryPostEdit(@RequestParam Long id, @RequestParam String name, Model model) {
+        // Отримуємо категорію за вказаним ID
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            category.setName(name); // Змінюємо назву категорії
+            categoryRepository.save(category); // Зберігаємо змінену категорію
+        } else {
+            // Якщо категорія з вказаним ID не знайдена, то можна відобразити помилку або зробити щось інше
+            // Наприклад, ви можете перенаправити користувача на іншу сторінку або повідомити про помилку
+            return "redirect:/error-page";
+        }
+        return "redirect:/category"; // Перенаправляємо користувача на сторінку зі списком категорій
+    }
+
+    @GetMapping("/category/delete")
+    public String categoryDelete(Model model) {
+        // Отримуємо список усіх категорій з бази даних
+        Iterable<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories); // Передаємо список категорій в модель
+        return "categoryDelete"; // Відображаємо сторінку видалення категорії
+    }
+
+    @PostMapping("/category/delete")
+    public String categoryPostDelete(@RequestParam Long id, Model model) {
+        // Отримуємо категорію за вказаним ID
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            categoryRepository.delete(category); // Видаляємо категорію з бази даних
+        } else {
+            // Якщо категорія з вказаним ID не знайдена, то можна відобразити помилку або зробити щось інше
+            // Наприклад, ви можете перенаправити користувача на іншу сторінку або повідомити про помилку
+            return "redirect:/error-page";
+        }
+        return "redirect:/category"; // Перенаправляємо користувача на сторінку зі списком категорій
+    }
 }
