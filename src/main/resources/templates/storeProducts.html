@@ -72,40 +72,28 @@
 
   <div class="content">
     <div>
-      <div class="mt-5">
-        <h2 class="title">Працівники</h2>
+      <div class="storeProducts mt-5">
+        <h2 class="title">Товари</h2>
         <div class="scrollable-table">
           <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
             <thead>
             <tr>
-              <th class="title">ID</th>
-              <th class="title">Прізвище</th>
-              <th class="title">Ім'я</th>
-              <th class="title">По-батькові</th>
-              <th class="title">Посада</th>
-              <th class="title">Зарплата</th>
-              <th class="title">Дата народження</th>
-              <th class="title">Дата виходу на роботи</th>
-              <th class="title">Телефон</th>
-              <th class="title">Місто</th>
-              <th class="title">Вулиця</th>
-              <th class="title">ZIP</th>
+              <th class="title">UPC</th>
+              <th class="title">UPC акційного</th>
+              <th class="title">ID продукту</th>
+              <th class="title">Ціна</th>
+              <th class="title">Кількість</th>
+              <th class="title">Акційний</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="el : ${users}">
-              <td th:text="${el.getId()}"></td>
-              <td th:text="${el.getSurname()}"></td>
-              <td th:text="${el.getName()}"></td>
-              <td th:text="${el.getPatronymic()}"></td>
-              <td th:text="${el.getRole()}"></td>
-              <td th:text="${el.getSalary()}"></td>
-              <td th:text="${el.getDate_of_birth()}"></td>
-              <td th:text="${el.getDate_of_start()}"></td>
-              <td th:text="${el.getPhone()}"></td>
-              <td th:text="${el.getCity()}"></td>
-              <td th:text="${el.getStreet()}"></td>
-              <td th:text="${el.getZip()}"></td>
+            <tr th:each="el : ${storeProducts}">
+              <td th:text="${el.getUPC()}"></td>
+              <td th:text="${el.getUPC_prom()}"></td>
+              <td th:text="${el.getId_product()}"></td>
+              <td th:text="${el.getSelling_price()}"></td>
+              <td th:text="${el.getProducts_number()}"></td>
+              <td th:text="${el.promotional_product ? 'Так' : 'Ні'}"></td>
             </tr>
             </tbody>
           </table>
@@ -116,15 +104,15 @@
 
   <div th:insert="blocks/footer :: footer" class="footer"></div>
 
-  <!-- Додаємо кнопку Додати працівника -->
+  <!-- Додаємо кнопки -->
   <div class="add-btn">
-    <a href="/user/add" class="btn btn-dark">Додати</a>
+    <a href="/storeProducts/add" class="btn btn-dark">Додати</a>
   </div>
   <div class="edit-btn">
-    <a href="/user/edit" class="btn btn-dark">Редагувати</a>
+    <a href="/storeProducts/edit" class="btn btn-dark">Редагувати</a>
   </div>
   <div class="delete-btn">
-    <a href="/user/delete" class="btn btn-dark">Видалити</a>
+    <a href="/storeProducts/delete" class="btn btn-dark">Видалити</a>
   </div>
 </div>
 </body>

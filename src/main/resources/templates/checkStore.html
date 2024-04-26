@@ -45,6 +45,18 @@
       top: 180px; /* Відступ від верхнього краю */
       right: 50px; /* Відступ від правого краю */
     }
+
+    .delete-btn {
+      position: fixed; /* Закріплюємо кнопку */
+      top: 230px; /* Відступ від верхнього краю */
+      right: 50px; /* Відступ від правого краю */
+    }
+
+    /* Додаємо стилі для контейнера з прокруткою */
+    .scrollable-table {
+      max-height: 400px; /* Максимальна висота таблиці */
+      overflow-y: auto; /* Додаємо вертикальну прокрутку */
+    }
   </style>
 </head>
 
@@ -56,6 +68,7 @@
     <div>
       <div class="checkStore mt-5">
         <h2 class="title">Чеки</h2>
+        <div class="scrollable-table">
         <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
           <thead>
           <tr>
@@ -78,15 +91,19 @@
           </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>
 
   <div th:insert="blocks/footer :: footer" class="footer"></div>
 
-  <!-- Додаємо кнопку Додати чек -->
+  <!-- Додаємо кнопки -->
   <div class="add-btn">
-    <a href="/checkStore/add" class="btn btn-dark">Додати чек</a>
+    <a href="/checkStore/add" class="btn btn-dark">Додати</a>
+  </div>
+  <div class="delete-btn">
+    <a href="/checkStore/delete" class="btn btn-dark">Видалити</a>
   </div>
 </div>
 </body>
