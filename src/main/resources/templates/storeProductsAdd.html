@@ -52,12 +52,20 @@
 
   <div class="content center-table">
     <div>
-      <div class="store_products mt-5">
+      <div class="storeProducts mt-5">
         <h2 class="title">Додати товар</h2>
-        <form action="/store_products/add" method="post">
+        <form action="/storeProducts/add" method="post">
           <input type="text" name="UPC" placeholder="UPC" class="form-control" maxlength="12"><br>
           <input type="text" name="UPC_prom" placeholder="UPC акційного" class="form-control" maxlength="12"><br>
-          <input type="number" name="id_product" placeholder="ID продукту" class="form-control" min="1"><br>
+          <!-- Випадаючий список продуктів -->
+          <select name="id_product" class="form-control">
+            <option value="">Виберіть ID продукту</option>
+            <!-- Відображення усіх продуктів зі списку -->
+            <option th:each="product : ${products}"
+                    th:value="${product.getId()}"
+                    th:text="${product.getName()}">
+            </option>
+          </select><br>
           <input type="number" name="selling_price" placeholder="Ціна" class="form-control" min="1"><br>
           <input type="number" name="products_number" placeholder="Кількість" class="form-control" min="1"><br>
           <a>Чи акційний товар?</a><br>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+
+<head>
+  <title>ZLAGODA</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .wrapper {
+      min-height: 100%;
+      position: relative;
+    }
+
+    .content {
+      padding-bottom: 60px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    /* Вирівнюємо таблицю по центру */
+    .center-table {
+      margin: 0 auto;
+      max-width: 500px; /* Додано обмеження ширини */
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div th:insert="blocks/header :: header"></div>
+
+  <div class="content center-table">
+    <div>
+      <div class="storeProducts mt-5">
+        <h2 class="title">Редагувати товар</h2>
+        <form action="/storeProducts/edit" method="post">
+          <!-- Випадаючий список товарів -->
+          <select name="UPC" class="form-control">
+            <option value="">Виберіть UPC товару</option>
+            <!-- Відображення усіх товарів зі списку -->
+            <option th:each="storeProduct : ${storeProducts}"
+                    th:value="${storeProduct.getUPC()}"
+                    th:text="${storeProduct.getUPC()}">
+            </option>
+          </select><br>
+          <input type="text" name="UPC_prom" placeholder="UPC акційного товару" class="form-control" maxlength="12"><br>
+          <!-- Випадаючий список продуктів -->
+          <select name="id_product" class="form-control">
+            <option value="">Виберіть продукт</option>
+            <!-- Відображення усіх продуктів зі списку -->
+            <option th:each="product : ${products}"
+                    th:value="${product.getId()}"
+                    th:text="${product.getName()}">
+            </option>
+          </select><br>
+          <!-- Поля для введення нових значень -->
+          <input type="text" name="selling_price" placeholder="Ціна" class="form-control" min="1"><br>
+          <input type="number" name="products_number" placeholder="Кількість" class="form-control" min="1"><br>
+          <a>Чи акційний товар?</a><br>
+          <input type="radio" id="yes" name="promotional_product" value="yes">
+          <label for="yes">Так</label>
+          <input type="radio" id="no" name="promotional_product" value="no">
+          <label for="no">Ні</label><br>
+          <button type="submit" class="btn btn-success">Редагувати</button><br><br>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:insert="blocks/footer :: footer" class="footer"></div>
+</div>
+</body>
+
+</html>
