@@ -8,4 +8,7 @@ import org.springframework.data.repository.query.Param;
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     @Query("SELECT c FROM Employee c WHERE c.phone = :phone")
     Employee findByPhone(@Param("phone") String phone);
+
+    @Query("SELECT c.role FROM Employee c WHERE c.id = :id")
+    String findRoleById(@Param("id") Long id);
 }
