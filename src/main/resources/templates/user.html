@@ -45,6 +45,24 @@
       top: 180px; /* Відступ від верхнього краю */
       right: 50px; /* Відступ від правого краю */
     }
+
+    .edit-btn {
+      position: fixed; /* Закріплюємо кнопку */
+      top: 230px; /* Відступ від верхнього краю */
+      right: 50px; /* Відступ від правого краю */
+    }
+
+    .delete-btn {
+      position: fixed; /* Закріплюємо кнопку */
+      top: 280px; /* Відступ від верхнього краю */
+      right: 50px; /* Відступ від правого краю */
+    }
+
+    /* Додаємо стилі для контейнера з прокруткою */
+    .scrollable-table {
+      max-height: 400px; /* Максимальна висота таблиці */
+      overflow-y: auto; /* Додаємо вертикальну прокрутку */
+    }
   </style>
 </head>
 
@@ -55,41 +73,43 @@
   <div class="content">
     <div>
       <div class="mt-5">
-        <h2 class="title">Користувачі</h2>
-        <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
-          <thead>
-          <tr>
-            <th class="title">ID</th>
-            <th class="title">Прізвище</th>
-            <th class="title">Ім'я</th>
-            <th class="title">По-батькові</th>
-            <th class="title">Посада</th>
-            <th class="title">Зарплата</th>
-            <th class="title">Дата народження</th>
-            <th class="title">Дата виходу на роботи</th>
-            <th class="title">Телефон</th>
-            <th class="title">Місто</th>
-            <th class="title">Вулиця</th>
-            <th class="title">ZIP</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="el : ${users}">
-            <td th:text="${el.getId()}"></td>
-            <td th:text="${el.getSurname()}"></td>
-            <td th:text="${el.getName()}"></td>
-            <td th:text="${el.getPatronymic()}"></td>
-            <td th:text="${el.getRole()}"></td>
-            <td th:text="${el.getSalary()}"></td>
-            <td th:text="${el.getDate_of_birth()}"></td>
-            <td th:text="${el.getDate_of_start()}"></td>
-            <td th:text="${el.getPhone()}"></td>
-            <td th:text="${el.getCity()}"></td>
-            <td th:text="${el.getStreet()}"></td>
-            <td th:text="${el.getZip()}"></td>
-          </tr>
-          </tbody>
-        </table>
+        <h2 class="title">Працівники</h2>
+        <div class="scrollable-table">
+          <table class="table table-bordered center-table"> <!-- Додаємо клас center-table -->
+            <thead>
+            <tr>
+              <th class="title">ID</th>
+              <th class="title">Прізвище</th>
+              <th class="title">Ім'я</th>
+              <th class="title">По-батькові</th>
+              <th class="title">Посада</th>
+              <th class="title">Зарплата</th>
+              <th class="title">Дата народження</th>
+              <th class="title">Дата виходу на роботи</th>
+              <th class="title">Телефон</th>
+              <th class="title">Місто</th>
+              <th class="title">Вулиця</th>
+              <th class="title">ZIP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="el : ${users}">
+              <td th:text="${el.getId()}"></td>
+              <td th:text="${el.getSurname()}"></td>
+              <td th:text="${el.getName()}"></td>
+              <td th:text="${el.getPatronymic()}"></td>
+              <td th:text="${el.getRole()}"></td>
+              <td th:text="${el.getSalary()}"></td>
+              <td th:text="${el.getDate_of_birth()}"></td>
+              <td th:text="${el.getDate_of_start()}"></td>
+              <td th:text="${el.getPhone()}"></td>
+              <td th:text="${el.getCity()}"></td>
+              <td th:text="${el.getStreet()}"></td>
+              <td th:text="${el.getZip()}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -98,7 +118,13 @@
 
   <!-- Додаємо кнопку Додати працівника -->
   <div class="add-btn">
-    <a href="/user/add" class="btn btn-dark">Додати користувача</a>
+    <a href="/user/add" class="btn btn-dark">Додати</a>
+  </div>
+  <div class="edit-btn">
+    <a href="/user/edit" class="btn btn-dark">Редагувати</a>
+  </div>
+  <div class="delete-btn">
+    <a href="/user/delete" class="btn btn-dark">Видалити</a>
   </div>
 </div>
 </body>
