@@ -38,11 +38,6 @@
       margin: 0 auto;
       max-width: 500px; /* Додано обмеження ширини */
     }
-
-    /* Відступ між кнопкою та футером */
-    .add-btn {
-      margin-top: 20px;
-    }
   </style>
 </head>
 
@@ -55,8 +50,15 @@
       <div class="products mt-5">
         <h2 class="title">Додати продукт</h2>
         <form action="/products/add" method="post">
-          <input type="number" name="id" placeholder="ID" class="form-control" min="1"><br>
-          <input type="number" name="id_category" placeholder="ID категорії" class="form-control" min="1"><br>
+          <!-- Випадаючий список категорій товарів -->
+          <select name="id_category" class="form-control">
+            <option value="">Виберіть ID категорії</option>
+            <!-- Відображення усіх категорій товарів зі списку -->
+            <option th:each="category : ${categories}"
+                    th:value="${category.getId()}"
+                    th:text="${category.getName()}">
+            </option>
+          </select><br>
           <input type="text" name="name" placeholder="Назва" class="form-control" maxlength="50"><br>
           <input type="text" name="description" placeholder="Опис" class="form-control" maxlength="100"><br>
           <button type="submit" class="btn btn-success">Додати</button><br>
