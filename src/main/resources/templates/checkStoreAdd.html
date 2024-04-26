@@ -38,11 +38,6 @@
       margin: 0 auto;
       max-width: 500px; /* Додано обмеження ширини */
     }
-
-    /* Відступ між кнопкою та футером */
-    .add-btn {
-      margin-top: 20px;
-    }
   </style>
 </head>
 
@@ -55,12 +50,25 @@
       <div class="checkStore mt-5">
         <h2 class="title">Додати чек</h2>
         <form action="/checkStore/add" method="post">
-          <input type="text" name="id" placeholder="ID" class="form-control" maxlength="10"><br>
-          <input type="number" name="id_empl" placeholder="ID працівника" class="form-control" min="1"><br>
-          <input type="text" name="id_card" placeholder="ID карти" class="form-control" maxlength="13"><br>
-          <input type="date" name="print_date" placeholder="Дата" class="form-control"><br>
+          <!-- Випадаючий список працівників -->
+          <select name="id_empl" class="form-control">
+            <option value="">Виберіть працівника</option>
+            <!-- Відображення усіх працівників зі списку -->
+            <option th:each="employee : ${employees}" th:if="${employee.getRole() == 'Касир'}"
+                    th:value="${employee.getId()}"
+                    th:text="${employee.getSurname() + ' ' + employee.getName() + ' ' + employee.getPatronymic()}">
+            </option>
+          </select><br>
+          <!-- Випадаючий список клієнтів -->
+          <select name="id_card" class="form-control">
+            <option value="">Виберіть карту клієнта</option>
+            <!-- Відображення усіх клієнтів зі списку -->
+            <option th:each="card : ${cards}"
+                    th:value="${card.getId()}"
+                    th:text="${card.getSurname() + ' ' + card.getName() + ' ' + card.getPatronymic()}">
+            </option>
+          </select><br>
           <input type="number" name="sum" placeholder="Сума" class="form-control" min="1"><br>
-          <input type="number" name="vat" placeholder="ПДВ" class="form-control" min="1"><br>
           <button type="submit" class="btn btn-success">Додати</button><br>
         </form>
       </div>

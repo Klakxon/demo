@@ -1,14 +1,15 @@
 package com.example.demo.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class CheckStore {
-    public CheckStore(String id, Long id_empl, String id_card, Date print_date, double sum, double vat) {
-        this.id = id;
+    public CheckStore(Long id_empl, String id_card, LocalDateTime print_date, double sum, double vat) {
         this.id_empl = id_empl;
         this.id_card = id_card;
         this.print_date = print_date;
@@ -19,17 +20,18 @@ public class CheckStore {
     }
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long id_empl;
     private String id_card;
-    private Date print_date;
+    private LocalDateTime print_date;
     private double sum, vat;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,11 +51,11 @@ public class CheckStore {
         this.id_card = id_card;
     }
 
-    public Date getPrint_date() {
+    public LocalDateTime getPrint_date() {
         return print_date;
     }
 
-    public void setPrint_date(Date print_date) {
+    public void setPrint_date(LocalDateTime print_date) {
         this.print_date = print_date;
     }
 
