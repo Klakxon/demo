@@ -107,4 +107,12 @@ public class EmployeeController {
         model.addAttribute("employees", employees);
         return "userNotInvolved";
     }
+
+    @GetMapping("/user/average-salary-by-role")
+    public String getAverageSalaryByRole(Model model) {
+        List<Object[]> employees = employeeRepository.findAverageSalaryByRole();
+        model.addAttribute("employees", employees);
+        return "Average";
+    }
+
 }

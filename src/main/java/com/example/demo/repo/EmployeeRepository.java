@@ -22,4 +22,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
             "    SELECT 1 FROM Card c WHERE c.surname = e.surname AND c.name = e.name AND c.patronymic = e.patronymic)")
     List<Object[]> findNotInvolved();
 
+    @Query("SELECT e.role, AVG(e.salary) FROM Employee e GROUP BY e.role")
+    List<Object[]> findAverageSalaryByRole();
+
 }
