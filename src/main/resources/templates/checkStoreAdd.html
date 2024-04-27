@@ -68,16 +68,7 @@
                       th:text="${card.getSurname() + ' ' + card.getName() + ' ' + card.getPatronymic()}">
               </option>
             </select><br>
-            <!-- Випадаючий список товарів -->
-            <select name="id_product" class="form-control">
-              <option value="">Виберіть товар</option>
-              <!-- Відображення усіх товарів зі списку -->
-              <option th:each="product : ${products}"
-                      th:value="${product.getId()}"
-                      th:text="${product.getName()}">
-              </option>
-            </select><br>
-            <label type="number" name="sum" class="form-control" min="1">Сума: </label><br>
+            <input type="number" name="sum" class="form-control" placeholder="Сума" min="1"><br>
             <button type="submit" class="btn btn-success">Додати</button><br>
           </form>
         </div>

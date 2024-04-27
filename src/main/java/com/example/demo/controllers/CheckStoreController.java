@@ -38,10 +38,6 @@ public class CheckStoreController {
     public String checkStoreAdd(Model model) {
         Iterable<Card> cards = cardRepository.findAll();
         model.addAttribute("cards", cards);
-        Iterable<StoreProduct> storeProducts = storeProductRepository.findAll();
-        model.addAttribute("storeProducts", storeProducts);
-        Iterable<Product> products = productRepository.findAll();
-        model.addAttribute("products", products);
         String role = getRoleFromRoleAndUserIdFile();
         model.addAttribute("role", role);
         return "checkStoreAdd";

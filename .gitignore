@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+role_and_userId.txt
