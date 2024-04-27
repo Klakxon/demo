@@ -13,44 +13,44 @@
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
                 Вийти з акаунту
               </a>
-            </li>
-            <li>
+            <li class="other">
+            <li class="without other">
               <a href="/category" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                 Категорії
               </a>
             </li>
-            <li>
+            <li class="other">
               <a href="/products" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                 Продукти
               </a>
             </li>
-            <li>
+            <li class="other">
               <a href="/storeProducts" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                 Товари
               </a>
             </li>
-            <li>
+            <li class="other">
               <a href="/clients" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                 Клієнти
               </a>
             </li>
-            <li>
+            <li class="other">
               <a href="/checkStore" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                 Чеки
               </a>
             </li>
-            <li>
+            <li class="other">
               <a href="/login" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
                 Вхід
               </a>
             </li>
-            <li>
+            <li class="without other">
               <a href="/user" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
                 Працівники
@@ -61,4 +61,46 @@
       </div>
     </div>
   </header>
+  <script>
+    var words;
+    var firstWord;
+
+    fetch('/get-file-content')
+            .then(response => response.text())
+            .then(text => {
+              // Розбиваємо текст на слова
+              words = text.split(/\s+/);
+              // Беремо перше слово
+              firstWord = words[0];
+              console.log('Перше слово файлу:', firstWord);
+
+              if (firstWord==="Менеджер" || firstWord==="менеджер") {
+                console.log("нетозапустився")
+                var withoutElements = document.querySelectorAll('li.other');
+
+                // Змінюємо стиль кожного елемента на "display: none"
+                withoutElements.forEach(function(element) {
+                  element.style.display = 'block';
+                });
+              } else if (firstWord==="Касир" || firstWord==="касир") {
+                // Отримуємо всі елементи з класом "without"
+                var withoutElements = document.querySelectorAll('li.without');
+
+                // Змінюємо стиль кожного елемента на "display: none"
+                withoutElements.forEach(function(element) {
+                  element.style.display = 'none';
+                });
+              } else {
+                var withoutElements = document.querySelectorAll('li.other');
+
+                // Змінюємо стиль кожного елемента на "display: none"
+                withoutElements.forEach(function(element) {
+                  element.style.display = 'none';
+                });
+              }
+            })
+            .catch(error => console.error('Помилка читання файлу:', error));
+
+  </script>
 </div>
+

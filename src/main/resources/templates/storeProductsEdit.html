@@ -6,6 +6,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <style>
+    .bottom-left {
+      position: fixed;
+      top: 20px;
+      left: 30px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
     html,
     body {
       height: 100%;
@@ -86,6 +94,42 @@
 
   <div th:insert="blocks/footer :: footer" class="footer"></div>
 </div>
+<div class="bottom-left" id="bottomLeftText"></div>
+
+<script>
+  var words;
+  var firstWord;
+
+  fetch('/get-file-content')
+          .then(response => response.text())
+          .then(text => {
+            // Розбиваємо текст на слова
+            words = text.split(/\s+/);
+            // Беремо перше слово
+            firstWord = words[0];
+            console.log('Перше слово файлу:', firstWord);
+
+            // Виводимо перше слово з лівого нижнього краю
+            document.getElementById('bottomLeftText').innerText = firstWord;
+            if (firstWord==="Менеджер" || firstWord==="менеджер") {
+              manager();
+            } else if (firstWord==="Касир" || firstWord==="касир") {
+              cashier();
+            } else {
+              other();
+            }
+          })
+          .catch(error => console.error('Помилка читання файлу:', error));
+  function manager() {
+    document.querySelector('.wrapper > .header').innerHTML = '<div th:insert="blocks/header :: header"></div>';
+  }
+  function cashier() {
+    document.querySelector('.wrapper > .header').innerHTML = '<div th:insert="blocks/cashierHeader :: header"></div>';
+  }
+  function other() {
+    document.querySelector('.wrapper > .header').innerHTML = '<div th:insert="blocks/home_header :: header"></div>';
+  }
+</script>
 </body>
 
 </html>
