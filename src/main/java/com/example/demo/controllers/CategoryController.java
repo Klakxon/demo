@@ -112,4 +112,32 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         return "categoryNumOfProductsOneRes";
     }
+
+    @GetMapping("/category/promotional")
+    public String categoryPromotional(Model model) {
+        Iterable<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
+        return "categoryPromotional";
+    }
+
+    @PostMapping("/category/promotional")
+    public String categoryPromotionalPost(@RequestParam String name, Model model) {
+        List<Object[]> categories = categoryRepository.findPromotional(name);
+        model.addAttribute("categories", categories);
+        return "categoryPromotionalRes";
+    }
+
+    @GetMapping("/category/promotionalNot")
+    public String categoryPromotionalNot(Model model) {
+        Iterable<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
+        return "categoryNotPromotional";
+    }
+
+    @PostMapping("/category/promotionalNot")
+    public String categoryPromotionalNotPost(@RequestParam String name, Model model) {
+        List<Object[]> categories = categoryRepository.findNotPromotional(name);
+        model.addAttribute("categories", categories);
+        return "categoryNotPromotionalRes";
+    }
 }
