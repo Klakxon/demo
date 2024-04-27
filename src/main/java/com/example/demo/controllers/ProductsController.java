@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -89,5 +90,12 @@ public class ProductsController {
             return "redirect:/error-page";
         }
         return "redirect:/products";
+    }
+
+    @GetMapping("/products/sort")
+    public String productsSort(Model model) {
+        List<Object[]> products = productRepository.sortProduct();
+        model.addAttribute("products", products);
+        return "sort";
     }
 }
