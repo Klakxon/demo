@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 public class LoginController {

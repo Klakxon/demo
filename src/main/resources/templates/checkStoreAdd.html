@@ -49,28 +49,30 @@
     <div>
       <div class="checkStore mt-5">
         <h2 class="title">Додати чек</h2>
-        <form action="/checkStore/add" method="post">
-          <!-- Випадаючий список працівників -->
-          <select name="id_empl" class="form-control">
-            <option value="">Виберіть працівника</option>
-            <!-- Відображення усіх працівників зі списку -->
-            <option th:each="employee : ${employees}" th:if="${employee.getRole() == 'Касир'}"
-                    th:value="${employee.getId()}"
-                    th:text="${employee.getSurname() + ' ' + employee.getName() + ' ' + employee.getPatronymic()}">
-            </option>
-          </select><br>
-          <!-- Випадаючий список клієнтів -->
-          <select name="id_card" class="form-control">
-            <option value="">Виберіть карту клієнта</option>
-            <!-- Відображення усіх клієнтів зі списку -->
-            <option th:each="card : ${cards}"
-                    th:value="${card.getId()}"
-                    th:text="${card.getSurname() + ' ' + card.getName() + ' ' + card.getPatronymic()}">
-            </option>
-          </select><br>
-          <input type="number" name="sum" placeholder="Сума" class="form-control" min="1"><br>
-          <button type="submit" class="btn btn-success">Додати</button><br>
-        </form>
+        <div th:if="${role == 'Касир'}">
+          <form action="/checkStore/add" method="post">
+            <!-- Випадаючий список клієнтів -->
+            <select name="id_card" class="form-control">
+              <option value="">Виберіть карту клієнта</option>
+              <!-- Відображення усіх клієнтів зі списку -->
+              <option th:each="card : ${cards}"
+                      th:value="${card.getId()}"
+                      th:text="${card.getSurname() + ' ' + card.getName() + ' ' + card.getPatronymic()}">
+              </option>
+            </select><br>
+            <!-- Випадаючий список товарів -->
+            <select name="id_product" class="form-control">
+              <option value="">Виберіть товар</option>
+              <!-- Відображення усіх товарів зі списку -->
+              <option th:each="product : ${products}"
+                      th:value="${product.getId()}"
+                      th:text="${product.getName()}">
+              </option>
+            </select><br>
+            <label type="number" name="sum" class="form-control" min="1">Сума: </label><br>
+            <button type="submit" class="btn btn-success">Додати</button><br>
+          </form>
+        </div>
       </div>
     </div>
   </div>

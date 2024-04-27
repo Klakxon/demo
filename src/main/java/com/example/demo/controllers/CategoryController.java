@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -90,5 +90,26 @@ public class CategoryController {
             return "redirect:/error-page";
         }
         return "redirect:/category"; // Перенаправляємо користувача на сторінку зі списком категорій
+    }
+
+    @GetMapping("/category/numOfProducts")
+    public String categoryNumOfProducts(Model model) {
+        List<Object[]> categories = categoryRepository.numberOfProductsInEachCategory();
+        model.addAttribute("categories", categories);
+        return "categoryNumOfProducts";
+    }
+
+    @GetMapping("/category/numOfProductsOne")
+    public String categoryNumOfProductsOne(Model model) {
+        Iterable<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
+        return "categoryNumOfProductsOne";
+    }
+
+    @PostMapping("/category/numOfProductsOne")
+    public String categoryNumOfProductsOnePost(@RequestParam String name, Model model) {
+        List<Object[]> categories = categoryRepository.numberOfProductsInCategory(name);
+        model.addAttribute("categories", categories);
+        return "categoryNumOfProductsOneRes";
     }
 }

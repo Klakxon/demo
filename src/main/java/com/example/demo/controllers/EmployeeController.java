@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -98,5 +99,12 @@ public class EmployeeController {
             return "redirect:/error-page";
         }
         return "redirect:/user";
+    }
+
+    @GetMapping("/user/notInvolved")
+    public String userNotInvolved(Model model) {
+        List<Object[]> employees = employeeRepository.findNotInvolved();
+        model.addAttribute("employees", employees);
+        return "userNotInvolved";
     }
 }
